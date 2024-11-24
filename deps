@@ -1,0 +1,22 @@
+Deps:
+g++ # > 11
+build-essential
+cmake
+
+libssl-dev
+libcpprest-dev
+libsqlite3-dev
+sqlite3
+libboost-all-dev
+nlohmann-json3-dev
+zlib1g-dev
+libpthread-stubs0-dev
+libcrypto++-dev
+
+
+Helpful Tools
+
+sqlitebrowser https://github.com/sqlitebrowser/sqlitebrowser
+ubuntu "sudo apt-get install sqlitebrowser"
+Open db file with the browser tool for easy check / debug
+

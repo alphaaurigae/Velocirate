@@ -1,2 +1,0 @@
-# Velocirate
-edgar db tool
