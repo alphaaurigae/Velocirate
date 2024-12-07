@@ -10,7 +10,7 @@
 - Build OS: "Ubuntu 24.04"
 
 - ```./build_cmake.sh``` - build
-- ```./clean_cmake.sh``` - remove build and start over. (does not remove db and input-file
+- ```./clean_cmake.sh``` - tidy build && dirs
 - ```./test.sh``` - 1. Create default db and input dir. 2. Run program to fetch json if not exist/dated. 3. Create/update db.
 
 ## Run:
