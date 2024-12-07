@@ -11,7 +11,7 @@
 
 - ```./build_cmake.sh``` - build
 - ```./clean_cmake.sh``` - remove build and start over. (does not remove db and input-file
-- ```./test.sh``` - run program to fetch json if not exist / outdated and create db if not exist / outdated.
+- ```./test.sh``` - 1. Create default db and input dir. 2. Run program to fetch json if not exist/dated. 3. Create/update db.
 
 ## Run:
 ```
