@@ -7,7 +7,7 @@ DB_DIR='db'
 
 clean() {
     echo "Cleaning build, bin, input and db directories..."
-    rm -rf ${BUILD_DIR} ${BIN_DIR} ${DB_DIR} ${DB_DIR}
+    rm -rf ${BUILD_DIR} ${BIN_DIR} ${INPUT_DIR} ${DB_DIR}
 }
 
 clean
