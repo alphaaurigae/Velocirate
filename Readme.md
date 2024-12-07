@@ -1,17 +1,39 @@
 # Velocirate
 
-+ Program downloads, extracts header for date and parses the json to sqlite.
+> Program downloads, extracts header for date and parses the json to sqlite.
 
 - Current input ... CIK identifier record [https://www.sec.gov/files/company_tickers_exchange.json]
 - Edgar Developer Resources  [ https://www.sec.gov/about/developer-resources]
 
-## Build:
+## Build
 
 - Build OS: "Ubuntu 24.04"
+
+... cmake ...
 
 - ```./build_cmake.sh``` - build
 - ```./clean_cmake.sh``` - tidy build && dirs
 - ```./test.sh``` - 1. Create default db and input dir. 2. Run program to fetch json if not exist/dated. 3. Create/update db.
+
+
+## Deps
+```
+- libssl-dev
+- libcpprest-dev - https://github.com/Microsoft/cpprestsdk
+- libsqlite3-dev
+- sqlite3
+- libboost-all-dev
+- nlohmann-json3-dev - https://github.com/nlohmann/json
+- zlib1g-dev - https://www.zlib.net
+- libpthread-stubs0-dev
+- libcrypto++-dev - https://github.com/weidai11/cryptopp
+```
+
+
+## Helpful Tools
+
+- ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
+
 
 ## Run:
 ```
@@ -30,6 +52,7 @@ File saved to: input//company_tickers_exchange.json
 9981 rows successfully inserted.
 ```
 
+
 ## Flow:
 
 1. Check if db exists, if not create db and create tables for headers and CIK if not exist.
@@ -42,23 +65,5 @@ File saved to: input//company_tickers_exchange.json
 - Optimize json file / json file back creation / naming.
 - RAII - classes.
 - Expand to process company details, filings and calculate statistics for a up to date db with sanitized & ordered data.
-
-
-## Deps
-```
-- libssl-dev
-- libcpprest-dev
-- libsqlite3-dev
-- sqlite3
-- libboost-all-dev
-- nlohmann-json3-dev
-- zlib1g-dev
-- libpthread-stubs0-dev
-- libcrypto++-dev
-```
-
-## Helpful Tools
-
-- ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
 
 
