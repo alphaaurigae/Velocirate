@@ -5,7 +5,6 @@
 #include <iostream>
 
 void initialize_db_schema(sqlite3*& db) {
-    // SQL statements to create tables
     const char* create_headers_table_sql = 
         "CREATE TABLE IF NOT EXISTS headers ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -20,7 +19,6 @@ void initialize_db_schema(sqlite3*& db) {
         "ticker TEXT, "
         "exchange TEXT);";
 
-    // Lambda for executing SQL and handling errors
     auto execute_sql = [&db](const char* sql, const std::string& table_name) {
         char* err_msg = nullptr;
         if (sqlite3_exec(db, sql, nullptr, nullptr, &err_msg) != SQLITE_OK) {
@@ -31,7 +29,6 @@ void initialize_db_schema(sqlite3*& db) {
         }
     };
 
-    // Use the lambda to execute both SQL statements
     execute_sql(create_headers_table_sql, "headers");
     execute_sql(create_tickers_table_sql, "company_tickers");
 }

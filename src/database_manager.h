@@ -20,4 +20,4 @@ private:
     bool openDatabase(const std::string& db_path);
 };
 
-#endif // DATABASE_MANAGER_H
+#endif

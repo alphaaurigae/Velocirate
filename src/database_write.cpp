@@ -53,7 +53,6 @@ void insert_data_into_tickers(sqlite3* db, const std::vector<std::vector<std::st
         return;
     }
 
-    // Lambda to handle row insertion
     auto insert_row = [&stmt](const std::vector<std::string>& row) {
         sqlite3_bind_text(stmt, 1, row[0].empty() ? "" : row[0].c_str(), -1, SQLITE_STATIC);
         sqlite3_bind_text(stmt, 2, row[1].empty() ? "" : row[1].c_str(), -1, SQLITE_STATIC);

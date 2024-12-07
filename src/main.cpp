@@ -12,22 +12,18 @@ int main(int argc, char* argv[]) {
     std::string inputpath = DEFAULT_INPUT_PATH; // config.h
     std::string db_path = DEFAULT_DB_PATH; // config.h
 
-    // Parse command-line arguments
+
     parse_arguments(argc, argv, inputpath, db_path);
 
-    // Construct full database path using db_path and DB_FILENAME
     std::string full_db_path = db_path + "/" + DB_FILENAME;
 
-    // Call the function to open the database; it will handle the rest (including closing)
-    open_database(full_db_path, db);
+    open_database(full_db_path, db); // database_read.cpp
 
     init_db(db);
 
-    // Use the centralized URL for fetching JSON
-    std::string url = JSON_URL;
+    std::string url = JSON_URL; // config.h
 
-    // Pass the input path to the fetchAndDownloadJson function
-    fetchAndDownloadJson(url, db, inputpath);
+    fetchAndDownloadJson(url, db, inputpath); // http_read.cpp
 
     if (db) sqlite3_close(db);
     return 0;

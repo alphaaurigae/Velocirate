@@ -42,13 +42,11 @@ void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string
             return;
         }
 
-        // Lambda for retrieving headers
         auto get_header = [](const web::http::http_headers& headers, const std::string& header_name) -> std::string {
             auto it = headers.find(header_name);
             return (it != headers.end()) ? it->second : "";
         };
 
-        // Decompress if needed
         auto decompress_if_needed = [&get_header](const web::http::http_headers& headers, std::string& body_data) {
             auto encoding = get_header(headers, "Content-Encoding");
             if (encoding == "gzip" || encoding == "deflate" || encoding == "br") {
@@ -58,13 +56,12 @@ void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string
 
         decompress_if_needed(response.headers(), body_data);
 
-        // Now, we define and capture 'saved_last_modified' and 'last_modified' in the lambda
         auto last_modified = get_header(response.headers(), "Last-Modified");
 
         std::string saved_last_modified;
         bool has_saved_data = read_header_from_db(db, "Last-Modified", saved_last_modified);
 
-        // Lambda for checking Last-Modified header (capturing the required variables)
+        // Checking Last-Modified header
         auto is_modified = [&saved_last_modified, &last_modified](const std::string& header_value) -> bool {
             return saved_last_modified != trim(header_value);
         };

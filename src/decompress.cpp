@@ -21,7 +21,6 @@ std::string decompress_gzip(const std::string& compressed_data) {
 
     char buffer[4096];
 
-    // Lambda to process the decompressed chunk and append to the decompressed data
     auto process_decompressed_chunk = [&decompressed_data, &buffer](size_t decompressed_size) {
         decompressed_data.insert(decompressed_data.end(), buffer, buffer + decompressed_size);
     };

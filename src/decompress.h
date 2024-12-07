@@ -3,6 +3,8 @@
 
 #include <string>
 
-std::string decompress_gzip(const std::string& compressed_data);
+std::string decompress_gzip(
+const std::string& compressed_data
+);
 
 #endif

@@ -6,12 +6,11 @@
 #include <cctype>
 
 std::string trim(const std::string& str) {
-    // Lambda to find the first non-whitespace character
+
     auto find_first_non_whitespace = [](const std::string& s) {
         return s.find_first_not_of(" \t\n\r\f\v");
     };
 
-    // Lambda to find the last non-whitespace character
     auto find_last_non_whitespace = [](const std::string& s) {
         return s.find_last_not_of(" \t\n\r\f\v");
     };

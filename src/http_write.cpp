@@ -16,7 +16,6 @@
 #include <nlohmann/json.hpp>
 
 
-// Save JSON data to a file
 void save_json_to_file(const std::string& body_data, const std::string& filename) {
     try {
         nlohmann::json json_data = nlohmann::json::parse(body_data);
@@ -35,7 +34,6 @@ void save_json_to_file(const std::string& body_data, const std::string& filename
 
 
 void load_and_parse_json(const std::string& filepath, sqlite3* db) {
-    // Lambda for opening a file
     auto open_file = [](const std::string& filepath) -> std::ifstream {
         std::ifstream file(filepath);
         if (!file.is_open()) {
@@ -44,10 +42,9 @@ void load_and_parse_json(const std::string& filepath, sqlite3* db) {
         return file;
     };
 
-    // Open the file
     std::ifstream file = open_file(filepath);
     if (!file.is_open()) {
-        return; // File opening failed, no need to continue
+        return;
     }
 
     nlohmann::json json_data;
@@ -58,7 +55,6 @@ void load_and_parse_json(const std::string& filepath, sqlite3* db) {
         return;
     }
 
-    // Lambda for validating JSON
     auto validate_json = [](const nlohmann::json& json_data) -> bool {
         if (!json_data.contains("fields") || !json_data.contains("data")) {
             std::cerr << "JSON does not contain expected 'fields' or 'data' keys." << std::endl;
@@ -74,14 +70,13 @@ void load_and_parse_json(const std::string& filepath, sqlite3* db) {
         return true;
     };
 
-    // Use the lambda for validation
     if (!validate_json(json_data)) {
         return;
     }
 
     const auto& data = json_data["data"];
 
-    // Lambda function for parsing each row
+
     auto parse_row = [](const nlohmann::json& row) {
         auto parse_field = [](const nlohmann::json& field, bool is_string = true) -> std::string {
             if (field.is_null()) return "";
@@ -100,12 +95,10 @@ void load_and_parse_json(const std::string& filepath, sqlite3* db) {
 
     std::vector<std::vector<std::string>> ticker_data;
 
-    // Lambda for inserting data
     auto insert_data = [&ticker_data](const std::vector<std::string>& row) {
         ticker_data.push_back(row);
     };
 
-    // Iterate over the data and use the lambda to parse and insert each row
     for (const auto& row : data) {
         insert_data(parse_row(row));
     }

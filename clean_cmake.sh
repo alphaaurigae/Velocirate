@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Define directories
-BUILD_DIR=build
-BIN_DIR=bin
+BUILD_DIR='build'
+BIN_DIR='bin'
+INPUT_DIR='input'
+DB_DIR='db'
 
-# Clean build and bin directories
 clean() {
-    echo "Cleaning build and bin directories..."
-    rm -rf ${BUILD_DIR} ${BIN_DIR}
+    echo "Cleaning build, bin, input and db directories..."
+    rm -rf ${BUILD_DIR} ${BIN_DIR} ${DB_DIR} ${DB_DIR}
 }
 
-# Main function
 clean

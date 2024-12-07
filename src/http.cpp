@@ -15,9 +15,9 @@
 #include <cpprest/http_client.h>
 #include <nlohmann/json.hpp>
 
-// Function to fetch and download JSON data
+
 void executeJsonFetch(const std::string& url, sqlite3* db, const std::string& inputpath) {
-    fetchAndDownloadJson(url, db, inputpath);  // Calls fetchAndDownloadJson from http_read.cpp
+    fetchAndDownloadJson(url, db, inputpath);
 }
 
 //void save_json_to_file(const std::string& body_data, const std::string& filename) {

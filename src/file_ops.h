@@ -3,7 +3,12 @@
 
 #include <string>
 
-void create_directory(const std::string& dir);
-void manage_backups(const std::string& filename);
+void create_directory(
+const std::string& dir
+);
+
+void manage_backups(
+const std::string& filename
+);
 
 #endif

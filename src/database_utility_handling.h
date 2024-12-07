@@ -3,6 +3,8 @@
 
 #include <sqlite3.h>
 
-void initialize_db_schema(sqlite3*& db);
+void initialize_db_schema(
+sqlite3*& db
+);
 
 #endif

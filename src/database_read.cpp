@@ -16,7 +16,6 @@ void open_db_connection(const std::string& full_db_path, sqlite3*& db) {
 bool read_header(sqlite3* db, const std::string& header_name, std::string& header_value) {
     const char* select_sql = "SELECT header_value FROM headers WHERE header_name = ? LIMIT 1;";
     
-    // Lambda to prepare, bind, and finalize the statement
     auto execute_sql = [&db, select_sql](const std::string& param, std::string& result_value) -> bool {
         sqlite3_stmt* stmt;
 
@@ -37,6 +36,5 @@ bool read_header(sqlite3* db, const std::string& header_name, std::string& heade
         return success;
     };
 
-    // Use the lambda to execute the query
     return execute_sql(header_name, header_value);
 }
