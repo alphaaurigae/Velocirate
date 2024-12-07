@@ -33,7 +33,7 @@
 
 ## Helpful Tools
 
-> ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
+- ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
 
 
 ## Run:
