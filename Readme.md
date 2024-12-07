@@ -66,5 +66,5 @@ File saved to: input//company_tickers_exchange.json
 - Optimize json file / json file back creation / naming.
 - RAII - classes.
 - Expand to process company details, filings and calculate statistics for a up to date db with sanitized & ordered data.
-
+- libcpprest ?
 
