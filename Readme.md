@@ -5,6 +5,7 @@
 - Current input ... CIK identifier record [https://www.sec.gov/files/company_tickers_exchange.json]
 - Edgar Developer Resources  [ https://www.sec.gov/about/developer-resources]
 
+
 ## Build
 
 - Build OS: "Ubuntu 24.04"

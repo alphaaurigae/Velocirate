@@ -99,7 +99,15 @@ else()
 endif()
 
 
-set(LIBS cpprest boost_system sqlite3 z ssl crypto pthread)
+set(LIBS
+cpprest
+boost_system
+sqlite3
+z
+ssl
+crypto
+pthread
+)
 
 set(SRC_DIR src)
 set(BUILD_DIR ${CMAKE_BINARY_DIR}/build)
