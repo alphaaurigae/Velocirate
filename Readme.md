@@ -18,7 +18,7 @@
 
 
 ## Deps
-```
+
 > libssl-dev
 > libcpprest-dev | https://github.com/Microsoft/cpprestsdk
 > libsqlite3-dev
@@ -28,12 +28,12 @@
 > zlib1g-dev | https://www.zlib.net
 > libpthread-stubs0-dev
 > libcrypto++-dev | https://github.com/weidai11/cryptopp
-```
+
 
 
 ## Helpful Tools
 
-- ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
+> ```sqlitebrowser``` https://github.com/sqlitebrowser/sqlitebrowser
 
 
 ## Run:
