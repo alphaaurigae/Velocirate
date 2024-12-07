@@ -19,15 +19,15 @@
 
 ## Deps
 ```
-- libssl-dev
-- libcpprest-dev - https://github.com/Microsoft/cpprestsdk
-- libsqlite3-dev
-- sqlite3
-- libboost-all-dev
-- nlohmann-json3-dev - https://github.com/nlohmann/json
-- zlib1g-dev - https://www.zlib.net
-- libpthread-stubs0-dev
-- libcrypto++-dev - https://github.com/weidai11/cryptopp
+> libssl-dev
+> libcpprest-dev | https://github.com/Microsoft/cpprestsdk
+> libsqlite3-dev
+> sqlite3
+> libboost-all-dev
+> nlohmann-json3-dev | https://github.com/nlohmann/json
+> zlib1g-dev | https://www.zlib.net
+> libpthread-stubs0-dev
+> libcrypto++-dev | https://github.com/weidai11/cryptopp
 ```
 
 
