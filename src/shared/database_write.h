@@ -1,11 +1,19 @@
-#include "database_write.h"
+#ifndef DATABASE_WRITE_H
+#define DATABASE_WRITE_H
+
+
+#include "database_read.h"
 
 #include <iostream>
+#include <vector>
+#include <string>
 
 #include <sqlite3.h>
 
 
-void save_header(sqlite3* db, const std::string& header_name, const std::string& header_value) {
+// Saves a header (header_name and header_value) to the database.
+// If the header already exists, it updates the header_value.
+inline void save_header(sqlite3* db, const std::string& header_name, const std::string& header_value) {
     const char* upsert_sql = 
         "INSERT INTO headers (header_name, header_value) "
         "VALUES (?, ?) "
@@ -29,7 +37,7 @@ void save_header(sqlite3* db, const std::string& header_name, const std::string&
     sqlite3_finalize(stmt);
 }
 
-void insert_data_into_tickers(sqlite3* db, const std::vector<std::vector<std::string>>& ticker_data) {
+inline void insert_data_into_tickers(sqlite3* db, const std::vector<std::vector<std::string>>& ticker_data) {
     if (ticker_data.empty()) {
         std::cerr << "No ticker data to insert." << std::endl;
         return;
@@ -81,3 +89,5 @@ void insert_data_into_tickers(sqlite3* db, const std::vector<std::vector<std::st
         std::cout << rows_inserted << " rows successfully inserted." << std::endl;
     }
 }
+
+#endif

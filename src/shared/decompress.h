@@ -1,12 +1,16 @@
-#include "decompress.h"
+#ifndef DECOMPRESS_H
+#define DECOMPRESS_H
 
-#include <zlib.h>
 
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <string>
 
-std::string decompress_gzip(const std::string& compressed_data) {
+#include <zlib.h>
+
+
+inline std::string decompress_gzip(const std::string& compressed_data) {
     std::vector<char> decompressed_data;
     z_stream strm;
     memset(&strm, 0, sizeof(strm));
@@ -42,3 +46,5 @@ std::string decompress_gzip(const std::string& compressed_data) {
 
     return std::string(decompressed_data.begin(), decompressed_data.end());
 }
+
+#endif

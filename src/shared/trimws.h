@@ -1,11 +1,13 @@
-// Utility Functions
+#ifndef TRIMWS_H
+#define TRIMWS_H
 
-#include "utils.h"
 
 #include <algorithm>
 #include <cctype>
+#include <string>
 
-std::string trim(const std::string& str) {
+
+inline std::string trim(const std::string& str) {
 
     auto find_first_non_whitespace = [](const std::string& s) {
         return s.find_first_not_of(" \t\n\r\f\v");
@@ -20,3 +22,4 @@ std::string trim(const std::string& str) {
 
     return (first == std::string::npos || last == std::string::npos) ? "" : str.substr(first, last - first + 1);
 }
+#endif

@@ -1,11 +1,15 @@
-#include "http.h"
+#ifndef HTTP_WRITE_H
+#define HTTP_WRITE_H
+
+
 #include "http_read.h"
-#include "http_write.h"
 #include "config.h"
 #include "decompress.h"
 #include "file_ops.h"
-#include "database.h"
-#include "utils.h"
+#include "database_read.h"
+#include "database_write.h"
+#include "init_sqlite_cik.h"
+#include "trimws.h"
 
 #include <thread>
 #include <chrono>
@@ -16,7 +20,7 @@
 #include <nlohmann/json.hpp>
 
 
-void save_json_to_file(const std::string& body_data, const std::string& filename) {
+inline void save_json_to_file(const std::string& body_data, const std::string& filename) {
     try {
         nlohmann::json json_data = nlohmann::json::parse(body_data);
         std::ofstream file(filename);
@@ -32,8 +36,7 @@ void save_json_to_file(const std::string& body_data, const std::string& filename
     }
 }
 
-
-void load_and_parse_json(const std::string& filepath, sqlite3* db) {
+inline void load_and_parse_json(const std::string& filepath, sqlite3* db) {
     auto open_file = [](const std::string& filepath) -> std::ifstream {
         std::ifstream file(filepath);
         if (!file.is_open()) {
@@ -108,5 +111,7 @@ void load_and_parse_json(const std::string& filepath, sqlite3* db) {
         return;
     }
 
-    insert_ticker_data(db, ticker_data);
+    insert_data_into_tickers(db, ticker_data);
 }
+
+#endif

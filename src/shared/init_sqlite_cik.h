@@ -1,10 +1,12 @@
-#include "database_utility_handling.h"
+#ifndef INIT_SQLITE_CIK_H
+#define INIT_SQLITE_CIK_H
+
 
 #include <sqlite3.h>
-
 #include <iostream>
 
-void initialize_db_schema(sqlite3*& db) {
+
+inline void initialize_db_schema(sqlite3*& db) {
     const char* create_headers_table_sql = 
         "CREATE TABLE IF NOT EXISTS headers ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -32,3 +34,5 @@ void initialize_db_schema(sqlite3*& db) {
     execute_sql(create_headers_table_sql, "headers");
     execute_sql(create_tickers_table_sql, "company_tickers");
 }
+
+#endif

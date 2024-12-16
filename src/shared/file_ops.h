@@ -1,14 +1,16 @@
+#ifndef FILE_OPS_H
+#define FILE_OPS_H
 
-#include "file_ops.h"
 
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include <sys/stat.h>
 #include <nlohmann/json.hpp>
 
 
-void create_directory(const std::string& dir) {
+inline void create_directory(const std::string& dir) {
     struct stat info;
     if (stat(dir.c_str(), &info) != 0) {
         if (mkdir(dir.c_str(), 0777) != 0) {
@@ -17,7 +19,7 @@ void create_directory(const std::string& dir) {
     }
 }
 
-void manage_backups(const std::string& filename) {
+inline void manage_backups(const std::string& filename) {
 
     auto file_exists = [](const std::string& filepath) {
         return std::ifstream(filepath).good();
@@ -43,3 +45,5 @@ void manage_backups(const std::string& filename) {
         rename_file(filename, backup_filename);
     }
 }
+
+#endif

@@ -1,8 +1,9 @@
-#include "database.h"
+#include "database_read.h"
+#include "database_write.h"
+#include "init_sqlite_cik.h"
 #include "config.h"
-#include "http.h"
-#include "usafuncs.h"
-
+#include "http_read.h"
+#include "argument_parser.h"
 #include <sqlite3.h>
 
 #include <iostream>
@@ -17,9 +18,9 @@ int main(int argc, char* argv[]) {
 
     std::string full_db_path = db_path + "/" + DB_FILENAME;
 
-    open_database(full_db_path, db); // database_read.cpp
+    open_db_connection(full_db_path, db);
 
-    init_db(db);
+    initialize_db_schema(db);
 
     std::string url = JSON_URL; // config.h
 

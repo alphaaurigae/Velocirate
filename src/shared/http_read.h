@@ -1,10 +1,13 @@
-#include "http.h"
-#include "http_read.h"
+#ifndef HTTP_READ_H
+#define HTTP_READ_H
+
+
 #include "http_write.h"
 #include "decompress.h"
 #include "file_ops.h"
-#include "database.h"
-#include "utils.h"
+#include "database_read.h"
+#include "database_write.h"
+#include "trimws.h"
 
 #include <iostream>
 #include <fstream>
@@ -13,8 +16,8 @@
 #include <nlohmann/json.hpp>
 
 
-
-web::http::http_response fetchJsonData(const std::string& url) {
+// Function to fetch JSON data from a URL
+inline web::http::http_response fetchJsonData(const std::string& url) {
     try {
         web::http::client::http_client client(U(url));
         web::http::http_request request(web::http::methods::GET);
@@ -28,7 +31,8 @@ web::http::http_response fetchJsonData(const std::string& url) {
     }
 }
 
-void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string& inputpath) {
+// Function to fetch JSON from a URL and download it to a file, then process it
+inline void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string& inputpath) {
     try {
         web::http::http_response response = fetchJsonData(url);
         if (response.status_code() != web::http::status_codes::OK) {
@@ -59,7 +63,7 @@ void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string
         auto last_modified = get_header(response.headers(), "Last-Modified");
 
         std::string saved_last_modified;
-        bool has_saved_data = read_header_from_db(db, "Last-Modified", saved_last_modified);
+        bool has_saved_data = read_header(db, "Last-Modified", saved_last_modified);
 
         // Checking Last-Modified header
         auto is_modified = [&saved_last_modified, &last_modified](const std::string& header_value) -> bool {
@@ -72,7 +76,7 @@ void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string
         // Check if the content has changed based on Last-Modified header
         if (!has_saved_data || is_modified(last_modified)) {
             save_json_to_file(body_data, file_path);
-            save_headers_to_db(db, "Last-Modified", last_modified);
+            save_header(db, "Last-Modified", last_modified);
             load_and_parse_json(file_path, db);
         } else {
             std::cout << "No change in Last-Modified header, skipping download." << std::endl;
@@ -81,3 +85,6 @@ void fetchAndDownloadJson(const std::string& url, sqlite3* db, const std::string
         std::cerr << "Error in fetchAndDownloadJson: " << e.what() << std::endl;
     }
 }
+
+
+#endif 
