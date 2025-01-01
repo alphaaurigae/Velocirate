@@ -11,6 +11,7 @@
 - Build OS: "Ubuntu 24.04"
 
 ... cmake ...
+(g++/clang - Cmakelists "option(USE_CLANG" ON/OFF - default g++ (clang complains! See "Todo" below)) 
 
 - ```./build_cmake.sh``` - build
 - ```./clean_cmake.sh``` - tidy build && dirs
@@ -61,10 +62,18 @@ File saved to: input//company_tickers_exchange.json
 3. Parse .json to db if 2 applied
 
 
-## Todo e.g:
+## Todo
 
 - Optimize json file / json file back creation / naming.
 - RAII - classes.
 - Expand to process company details, filings and calculate statistics for a up to date db with sanitized & ordered data.
 - libcpprest ?
 
+- 
+```
+
+build with g++ works but clang complains
+
+/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/unique_ptr.h:97:16: error: invalid application of 'sizeof' to an incomplete type 'web::json::details::_Value'
+   97 |         static_assert(sizeof(_Tp)>0,
+```
