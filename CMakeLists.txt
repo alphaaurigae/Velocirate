@@ -104,7 +104,7 @@ if(ENABLE_DEPENDENCY_GENERATION)
 endif()
 
 ## generalized, needs update, maybe
-option(ENABLE_SANITIZERS "Enable sanitizer compile flags for runtime debugging" ON)
+option(ENABLE_SANITIZERS "Enable sanitizer compile flags for runtime debugging" OFF)
 # man gcc | grep -A 10 'sanitize'
 # clang --help | grep -A 10 'sanitize'
 if(ENABLE_SANITIZERS)
@@ -214,20 +214,37 @@ file(GLOB_RECURSE SRCS ${SRC_DIR}/*.cpp)  # depth 1
 
 # Build -------------------------------------------------------------------------------------------------------------------------------------
 
+
 set(LIBS_MAIN
-cpprest
-boost_system
 sqlite3
-z
 ssl
-crypto
-pthread
+PocoData
+PocoJSON
+PocoXML
+PocoNet
+PocoUtil
+PocoFoundation
+PocoNetSSL
+PocoZip
+PocoFoundation
 )
 
 
 add_executable(${MY_PROJECT_BIN_NAME} ${SRCS})
 
+find_package(Boost 1.83 REQUIRED)
 
+
+#target_link_libraries(${MY_PROJECT_BIN_NAME}
+#    ${LIBS_MAIN}
+#    Poco::Data 
+#    Poco::JSON 
+#    Poco::XML 
+#    Poco::Net 
+#    Poco::Util 
+#    Poco::Foundation 
+#    Poco::NetSSL
+#)
 target_link_libraries(${MY_PROJECT_BIN_NAME} ${LIBS_MAIN})
 
 

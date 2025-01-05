@@ -4,9 +4,10 @@
 #include "config.h"
 #include "http_read.h"
 #include "argument_parser.h"
-#include <sqlite3.h>
 
 #include <iostream>
+
+#include <sqlite3.h>
 
 int main(int argc, char* argv[]) {
     sqlite3* db = nullptr;

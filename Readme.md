@@ -20,15 +20,12 @@
 
 ## Deps
 ```
+- libpoco-dev* | https://pocoproject.org/ | https://github.com/pocoproject/poco
 - libssl-dev
-- libcpprest-dev | https://github.com/Microsoft/cpprestsdk
 - libsqlite3-dev
 - sqlite3
-- libboost-all-dev
-- nlohmann-json3-dev | https://github.com/nlohmann/json
-- zlib1g-dev | https://www.zlib.net
-- libpthread-stubs0-dev
-- libcrypto++-dev | https://github.com/weidai11/cryptopp
+
+
 ```
 
 
@@ -46,12 +43,25 @@ Usage:
   --database, -db <path>   Specify the database directory path
 ```
 ```
-$ '/home/mmmm/Desktop/Velocirate/test.sh' 
+$ '/home/mmmm/Desktop/proj/git/Velocirate/test.sh' 
+mkdir: cannot create directory ‘input’: File exists
+mkdir: cannot create directory ‘db’: File exists
+bin/velocirate --inputpath input/ --database db/
 Database opened successfully!
 headers table created/verified successfully.
 company_tickers table created/verified successfully.
+HTTP Status: 200
 File saved to: input//company_tickers_exchange.json
-9981 rows successfully inserted.
+10038 rows successfully inserted.
+total 1184
+drwxrwxr-x 2 mmmm mmmm    4096 Jan  5 12:07 .
+drwxrwxr-x 8 mmmm mmmm    4096 Jan  5 12:07 ..
+-rw-rw-r-- 1 mmmm mmmm 1201252 Jan  5 12:07 company_tickers_exchange.json
+total 472
+drwxrwxr-x 2 mmmm mmmm   4096 Jan  5 12:07 .
+drwxrwxr-x 8 mmmm mmmm   4096 Jan  5 12:07 ..
+-rw-r--r-- 1 mmmm mmmm 475136 Jan  5 12:07 data.db
+
 ```
 
 
@@ -68,12 +78,3 @@ File saved to: input//company_tickers_exchange.json
 - RAII - classes.
 - Expand to process company details, filings and calculate statistics for a up to date db with sanitized & ordered data.
 - libcpprest ?
-
-- 
-```
-
-build with g++ works but clang complains
-
-/usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/unique_ptr.h:97:16: error: invalid application of 'sizeof' to an incomplete type 'web::json::details::_Value'
-   97 |         static_assert(sizeof(_Tp)>0,
-```
