@@ -1,15 +1,18 @@
-# Single bin template
+# Single & multi bin template
 
 # Main --------------------------------------------------------------------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.28.3)
 
 
 set(MY_PROJECT_NAME "Velocirate")
-set(MY_PROJECT_BIN_NAME "velocirate")
-set(MY_PROJECT_VERSION "888.0")
+set(MY_PROJECT_VERSION "888.0.0")
 
 
-project(${MY_PROJECT_BIN_NAME} VERSION ${MY_PROJECT_VERSION} LANGUAGES CXX)
+set(MY_PROJECT_BIN1_NAME "velocirate")
+# [add executeables here] main name definition
+
+
+project(${MY_PROJECT_NAME} VERSION ${MY_PROJECT_VERSION} LANGUAGES CXX)
 
 
 set(CMAKE_CXX_STANDARD 23)
@@ -215,7 +218,12 @@ file(GLOB_RECURSE SRCS ${SRC_DIR}/*.cpp)  # depth 1
 # Build -------------------------------------------------------------------------------------------------------------------------------------
 
 
+# global
 set(LIBS_MAIN
+)
+
+# per bin
+set(LIBS_${MY_PROJECT_BIN1_NAME}
 sqlite3
 ssl
 PocoData
@@ -230,27 +238,31 @@ PocoFoundation
 )
 
 
-add_executable(${MY_PROJECT_BIN_NAME} ${SRCS})
 
-find_package(Boost 1.83 REQUIRED)
-
-
-#target_link_libraries(${MY_PROJECT_BIN_NAME}
-#    ${LIBS_MAIN}
-#    Poco::Data 
-#    Poco::JSON 
-#    Poco::XML 
-#    Poco::Net 
-#    Poco::Util 
-#    Poco::Foundation 
-#    Poco::NetSSL
-#)
-target_link_libraries(${MY_PROJECT_BIN_NAME} ${LIBS_MAIN})
+option(BUILD_${MY_PROJECT_BIN1_NAME} "Enable ${MY_PROJECT_BIN1_NAME}" ON)
+# [add executeables here]
 
 
-set_target_properties(${MY_PROJECT_BIN_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR}
-)
+function(add_feature_executable FEATURE_NAME FEATURE_SOURCES)
+    set(FEATURE_OPTION "BUILD_${FEATURE_NAME}")
+
+    if(${${FEATURE_OPTION}})
+        add_executable(${FEATURE_NAME} ${FEATURE_SOURCES})
+        target_link_libraries(${FEATURE_NAME} PRIVATE ${LIBS_MAIN})
+
+        # Conditionally link feature-specific libraries
+        if(${FEATURE_NAME} STREQUAL ${MY_PROJECT_BIN1_NAME})
+            target_link_libraries(${FEATURE_NAME} PRIVATE ${LIBS_${MY_PROJECT_BIN1_NAME}})
+        endif()
+        # [add executeables here]
+
+        set_target_properties(${FEATURE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+    endif()
+endfunction()
+
+
+add_feature_executable(${MY_PROJECT_BIN1_NAME} ${SRC_DIR}/${MY_PROJECT_BIN1_NAME}/main.cpp)
+# [add executeables here]
 
 
 file(MAKE_DIRECTORY ${BUILD_DIR})
@@ -284,6 +296,12 @@ message(STATUS "Warnings as Errors: ${ENABLE_WARNINGS_AS_ERRORS}")
 message(STATUS "Verbose Makefiles: ${ENABLE_VERBOSE_MAKEFILES}")
 message(STATUS "Compile Commands Export: ${ENABLE_COMPILE_COMMANDS}")
 message(STATUS "------------------------------------------------------------")
+
+message(STATUS "Build ${MY_PROJECT_BIN1_NAME}: ${BUILD_${MY_PROJECT_BIN1_NAME}}")
+# [add executeables here]
+
+
+# because why not ...
 set(ASCII_ART "
                    .;                                       .   
 .;.       .-.     .;'               .-.                 ...;... 
@@ -295,5 +313,8 @@ set(ASCII_ART "
 VERSION ${MY_PROJECT_VERSION}
 ")
 message(STATUS "${ASCII_ART}")
+
+
+
 
 
