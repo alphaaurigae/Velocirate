@@ -289,30 +289,7 @@ add_custom_target(my_clean
 
 # Print settings info (before build) --------------------------------------------------------------------------------------------------------
 message(STATUS "------------------------------------------------------------")
-message(STATUS "Project: ${PROJECT_NAME} (Version: ${PROJECT_VERSION})")
-message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
-
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
-endif()
-message(STATUS "CMake generator: ${CMAKE_GENERATOR}")
-message(STATUS "Compiler: ${CXX_COMPILER}")
-message(STATUS "Compiler Flags: ${CMAKE_CXX_FLAGS}")
-message(STATUS "Dependency Generation: ${ENABLE_DEPENDENCY_GENERATION}")
-message(STATUS "Enable sanitizer compile flags for runtime debugging: ${ENABLE_SANITIZERS}")
-message(STATUS "Warnings as Errors: ${ENABLE_WARNINGS_AS_ERRORS}")
-message(STATUS "Verbose Makefiles: ${ENABLE_VERBOSE_MAKEFILES}")
-message(STATUS "Compile Commands Export: ${ENABLE_COMPILE_COMMANDS}")
-message(STATUS "------------------------------------------------------------")
-
-message(STATUS "Build ${BIN1}: ${BUILD_${BIN1}}")
-# [add executeables here]
-
-
-# because why not ...
+#message(STATUS "Project: ${PROJECT_NAME} (Version: ${PROJECT_VERSION})")
 set(ASCII_ART "
                    .;                                       .   
 .;.       .-.     .;'               .-.                 ...;... 
@@ -321,9 +298,40 @@ set(ASCII_ART "
  ;;  ;   `:::'_;;_.-`;;'  `;;;;'_.;:._..;'    `:::'-'.;   `:::' 
  `;.'                                                           
 
-VERSION ${VERSION}
-")
+VERSION ${VERSION}")
 message(STATUS "${ASCII_ART}")
+message(STATUS "------------------------------------------------------------")
+message(STATUS "CMake generator: ${CMAKE_GENERATOR}")
+message(STATUS "Compiler: ${CXX_COMPILER}")
+message(STATUS "------------------------------------------------------------")
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "Default flags: ${COMPILER_FLAGS_BASE}")
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+message(STATUS "Debug build! Additional flags: ${COMPILER_FLAGS_DEBUG}")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+message(STATUS "Release build! Additional flags: ${COMPILER_FLAGS_RELEASE}")
+elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+message(STATUS "RelWithDebInfo build! Additional flags: ${COMPILER_FLAGS_RELWITHDEBINFO}")
+elseif(CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+message(STATUS "MinSizeRel build! Additional flags: ${COMPILER_FLAGS_MINSIZEREL}")
+endif()
+#message(STATUS "Flags all: ${CMAKE_CXX_FLAGS}")
+message(STATUS "------------------------------------------------------------")
+message(STATUS "Dependency Generation: ${ENABLE_DEPENDENCY_GENERATION}")
+message(STATUS "Enable sanitizer compile flags for runtime debugging: ${ENABLE_SANITIZERS}")
+message(STATUS "Warnings as Errors: ${ENABLE_WARNINGS_AS_ERRORS}")
+message(STATUS "Verbose Makefiles: ${ENABLE_VERBOSE_MAKEFILES}")
+message(STATUS "Compile Commands Export: ${ENABLE_COMPILE_COMMANDS}")
+message(STATUS "------------------------------------------------------------")
+message(STATUS "Build ${BIN1}: ${BUILD_${BIN1}}")
+# [add executeables here]
+message(STATUS "------------------------------------------------------------")
+#message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
+#message(STATUS "OpenCV_LIBS: ${OpenCV_LIBS}")
+#message(STATUS "OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
+#message(STATUS "------------------------------------------------------------")
+
+
 
 
 
