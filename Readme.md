@@ -20,12 +20,9 @@
 
 ## Deps
 ```
-- libpoco-dev* | https://pocoproject.org/ | https://github.com/pocoproject/poco
-- libssl-dev
-- libsqlite3-dev
-- sqlite3
-
-
+- libpoco-dev* | https://pocoproject.org | https://github.com/pocoproject/poco
+- libssl-dev | https://openssl-library.org | https://github.com/openssl/openssl
+- sqlite3 && libsqlite3-dev | https://sqlite.org
 ```
 
 

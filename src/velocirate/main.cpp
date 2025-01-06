@@ -1,6 +1,6 @@
 #include "database_read.h"
 #include "database_write.h"
-#include "init_sqlite_cik.h"
+//#include "init_sqlite_cik.h"
 #include "config.h"
 #include "http_read.h"
 #include "argument_parser.h"
